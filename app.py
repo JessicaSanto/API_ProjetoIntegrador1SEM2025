@@ -6,26 +6,27 @@ app = Flask('projeto')
 
 # Configuração do banco de dados
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Corrigido para False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://jessica:senai%40134@projetointegrador-graduacao.mysql.database.azure.com/projetointegrador'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:senai%40134@127.0.0.1:3306/projetoIntegrador'
 
 # Inicializando o SQLAlchemy
 mybd = SQLAlchemy(app)
 
 # Modelo da tabela 'Valor'
 class Emissao(mybd.Model):
-    __tablename__ = 'coleta_residuos'
+    __tablename__ = 'emissaoco2'
     id = mybd.Column(mybd.Integer, primary_key=True)
-    ano_coleta = mybd.Column(mybd.String(100))
-    populacao = mybd.Column(mybd.String(50))
-    qtd_residuos_coletados = mybd.Column(mybd.String(100))
-    percentual_coleta_seletiva = mybd.Column(mybd.String(50))
-    destinacao_principal = mybd.Column(mybd.String(100))
-    emissao_co2 = mybd.Column(mybd.String(50))    
-    tipo_residuo = mybd.Column(mybd.String(100))  # Incluído no método to_json
+    ano = mybd.Column(mybd.String(100))
+    mes = mybd.Column(mybd.String(50))
+    transporte = mybd.Column(mybd.String(100))
+    energia = mybd.Column(mybd.String(50))
+    residuos = mybd.Column(mybd.String(100))
+    agropecuaria = mybd.Column(mybd.String(50))    
+    processos_industriais = mybd.Column(mybd.String(100))  # Incluído no método to_json
 
     def to_json(self):
-        return {"id": self.id, "ano_coleta": self.ano_coleta, "populacao": self.populacao, "qtd_residuos_coletados": self.qtd_residuos_coletados, "percentual_coleta_seletiva": self.percentual_coleta_seletiva, "destinacao_principal": self.destinacao_principal, "emissao_co2": self.emissao_co2, "tipo_residuo": self.tipo_residuo}
+        return {"id": self.id, "ano": self.ano, "mes": self.mes, "transporte": self.transporte, "energia": self.energia, "residuos": self.residuos, "agropecuaria": self.agropecuaria, "processos_industriais": self.processos_industriais}
 
+# Rota para obter todos os valores
 @app.route("/dados", methods=["GET"])
 def seleciona_valor():
     valor_objetos = Emissao.query.all()
