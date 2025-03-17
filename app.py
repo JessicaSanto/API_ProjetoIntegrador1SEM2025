@@ -6,7 +6,7 @@ app = Flask('projeto')
 
 # Configuração do banco de dados
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Corrigido para False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:senai%40134@127.0.0.1:3306/projetoIntegrador'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://jessica:senai%40134@projetointegrador1-2025.mysql.database.azure.com/projetoIntegrador'
 
 # Inicializando o SQLAlchemy
 mybd = SQLAlchemy(app)
